@@ -8,7 +8,7 @@ body{
     height: 100vh;
     margin: 0;
 }
- #logo{
+#logo{
     padding: 0px;
     display: flex;
     justify-content: center;
@@ -27,12 +27,17 @@ body{
     padding-top: 0px;
 }
 #display{
+    height: 80px;
     border-radius: 20px;
     background-color: beige;
     padding: 10px;
     border: solid black;
     display: flex;
     flex-direction: row-reverse;
+    align-items: center;
+    font-size: 50px;
+    font-weight: 50;
+    font-family: sans-serif;
 }
 #buttons{
     /* width: 440px; */

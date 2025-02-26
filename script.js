@@ -35,3 +35,21 @@ function operate (operation, a, b,){
         division(a,b);
     }
 }
+
+const numbers = document.querySelectorAll(".num")
+const operators = document.querySelectorAll(".operator")
+const display = document.querySelector("#display");
+
+let isFirstClick = true; // Initialize the flag outside the loop
+
+numbers.forEach((button) => {
+    button.addEventListener("click", () => {
+        let value = button.textContent;
+        if (isFirstClick) {
+            display.textContent = value;
+            isFirstClick = false;
+        } else {
+            display.textContent += value;
+        }
+    });
+});

@@ -1,38 +1,35 @@
 function add(a,b){
-    let result = a + b;
-    return result;
+    return a + b;
 }
 
 function subtract(a,b){
-    let result = a - b;
-    return result;
+    return a - b;
 }
 
 function multiplication(a,b){
-    let result = a * b;
-    return result;
+    return a * b;
 }
 
 function division(a,b){
-    let result = a / b;
-    return result;
+    return b !== 0 ? a / b : "Error";
 }
-
-console.log(multiplication(10, 2));
 
 let firstVal ;
 let operator ;
 let secondVal ;
 
 function operate (operator, firstVal, secondVal){
-    if (operator == add){
-        add(firstVal,secondVal);
-    }else if(operator == subtract){
-        subtract(firstVal,secondVal);
-    }else if(operator == multiplication){
-        multiplication(firstVal,secondVal);
-    }else if(operator == division){
-        division(firstVal,secondVal);
+    firstVal = parseFloat(firstVal);
+    secondVal = parseFloat(secondVal);
+
+    if (operator == "+"){
+        return add(firstVal,secondVal);
+    }else if(operator == "-"){
+        return subtract(firstVal,secondVal);
+    }else if(operator == "*"){
+        return multiplication(firstVal,secondVal);
+    }else if(operator == "/"){
+        return division(firstVal,secondVal);
     }
 }
 
@@ -40,19 +37,19 @@ const numbers = document.querySelectorAll(".num")
 const operators = document.querySelectorAll(".operator")
 const display = document.querySelector("#display");
 
-let isNumClick = true; // Initialize the flag outside the loop
+let isNumClick = true;
 let isOperatorClick = true;
-
 
 numbers.forEach((button) => {
     button.addEventListener("click", () => {
-        let value = button.textContent;
-        if (isNumClick) {
-            display.textContent = value;
-            isNumClick = false;
-        } else {
-            display.textContent += value;
-        }
+        if (display.textContent.length < 12){
+            if (isNumClick) {
+                display.textContent = button.textContent;
+                isNumClick = false;
+            } else {
+                display.textContent += button.textContent;
+            }
+        }    
     });
 });
 
@@ -61,10 +58,44 @@ operators.forEach((button) => {
         if (isOperatorClick) {
             firstVal = display.textContent;
             isOperatorClick = false;
-            operator = button.id;
-            display.textContent = 0;
+            operator = button.textContent;
+            isNumClick = true;
         }else{
-            
+            secondVal = display.textContent;
+            display.textContent = operate(operator, firstVal, secondVal);
+            operator = button.textContent;
+            firstVal = display.textContent;
+            secondVal = null;
+            isOperatorClick = true;
+            isNumClick = true;
         }
     })
 })
+
+document.getElementById("clearAll").addEventListener("click", () => {
+    display.textContent = 0;
+    isNumClick = true;
+    isOperatorClick = true;
+    firstVal = null;
+    secondVal = null;
+    operator = null;
+});
+
+document.getElementById("clear").addEventListener("click", () => {
+    if (display.textContent.length > 1) {
+        display.textContent = display.textContent.slice(0, -1);
+    } else {
+        display.textContent = "0"; // Reset to 0 if only one character is left
+    }
+});
+
+document.getElementById("equality").addEventListener("click", () => {
+    if(firstVal &&  operator){
+        secondVal = display.textContent;
+        display.textContent = operate(operator, firstVal, secondVal);
+        firstVal = display.textContent;
+        operator = null;
+        isNumClick = true;
+        isOperatorClick = true;
+    }
+});

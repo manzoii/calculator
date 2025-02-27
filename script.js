@@ -1,19 +1,3 @@
-function add(a,b){
-    return a + b;
-}
-
-function subtract(a,b){
-    return a - b;
-}
-
-function multiplication(a,b){
-    return a * b;
-}
-
-function division(a,b){
-    return b !== 0 ? a / b : "Error";
-}
-
 let firstVal ;
 let operator ;
 let secondVal ;
@@ -23,13 +7,13 @@ function operate (operator, firstVal, secondVal){
     secondVal = parseFloat(secondVal);
 
     if (operator == "+"){
-        return add(firstVal,secondVal);
+        return firstVal + secondVal;
     }else if(operator == "-"){
-        return subtract(firstVal,secondVal);
+        return firstVal - secondVal ;
     }else if(operator == "*"){
-        return multiplication(firstVal,secondVal);
+        return firstVal * secondVal;
     }else if(operator == "/"){
-        return division(firstVal,secondVal);
+        return secondVal !== 0 ? firstVal / secondVal : "Error";
     }
 }
 

@@ -3,6 +3,7 @@ body{
     margin: none;
     padding: none;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -40,7 +41,6 @@ body{
     font-family: 'Courier New', Courier, monospace;
 }
 #buttons{
-    /* width: 440px; */
     margin-top: 20px;
 }
 #zero{
@@ -92,4 +92,5 @@ button{
     background-color: #ff073a;
     color: white;
 }
+
 

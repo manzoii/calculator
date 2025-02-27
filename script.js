@@ -39,15 +39,21 @@ const display = document.querySelector("#display");
 
 let isNumClick = true;
 let isOperatorClick = true;
+let isfirstdecimal = true;
 
 numbers.forEach((button) => {
     button.addEventListener("click", () => {
         if (display.textContent.length < 12){
-            if (isNumClick) {
-                display.textContent = button.textContent;
-                isNumClick = false;
-            } else {
+            if (button.textContent != "."){
+                if (isNumClick) {
+                    display.textContent = button.textContent;
+                    isNumClick = false;
+                } else {
+                    display.textContent += button.textContent;
+                }
+            }else if(button.textContent == "." && isfirstdecimal){
                 display.textContent += button.textContent;
+                isfirstdecimal = false;
             }
         }    
     });
@@ -55,6 +61,7 @@ numbers.forEach((button) => {
 
 operators.forEach((button) => {
     button.addEventListener("click", () => {
+        isfirstdecimal = true;
         if (isOperatorClick) {
             firstVal = display.textContent;
             isOperatorClick = false;
@@ -79,13 +86,14 @@ document.getElementById("clearAll").addEventListener("click", () => {
     firstVal = null;
     secondVal = null;
     operator = null;
+    isfirstdecimal = true;
 });
 
 document.getElementById("clear").addEventListener("click", () => {
     if (display.textContent.length > 1) {
         display.textContent = display.textContent.slice(0, -1);
     } else {
-        display.textContent = "0"; // Reset to 0 if only one character is left
+        display.textContent = "0";
     }
 });
 
@@ -97,5 +105,6 @@ document.getElementById("equality").addEventListener("click", () => {
         operator = null;
         isNumClick = true;
         isOperatorClick = true;
+        isfirstdecimal = true;
     }
 });
